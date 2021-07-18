@@ -1,2 +1,2 @@
-LABEL=root  /       ext4  defaults,noatime,nodiratime  0 0
-LABEL=boot  /boot   vfat  defaults,noatime,nodiratime  0 0
+LABEL=HC4ROOT  /       ext4  defaults,noatime,nodiratime  0 0
+LABEL=HC4BOOT  /boot   vfat  defaults,noatime,nodiratime  0 0
