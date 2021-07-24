@@ -25,9 +25,3 @@ partprobe "$DEVICE"
 
 mkfs.vfat -n HC4BOOT "${DEVICE}1"
 mkfs.ext4 -L HC4ROOT "${DEVICE}2"
-
-# flash u-boot into MBR
-cd sd_fuse
-./sd_fusing.sh "$DEVICE"
-
-echo "sd-card ejected"
