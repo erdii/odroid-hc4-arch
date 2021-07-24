@@ -35,5 +35,6 @@ fi
 set -ex
 
 rsync -a "$SOURCE/" "$TARGET/root/"
+rm -rf $TARGET/boot/*
 mv $TARGET/root/boot/* "$TARGET/boot/"
 sync
