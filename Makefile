@@ -3,6 +3,8 @@ SHELL=/bin/bash
 
 MIRROR := http://de5.mirror.archlinuxarm.org
 
+export LC_ALL := POSIX
+
 .cache/ArchLinuxARM-aarch64-latest.tar.gz:
 	mkdir -p ".cache/tmp"
 	curl -o ".cache/tmp/ArchLinuxARM-aarch64-latest.tar.gz" $(MIRROR)/os/ArchLinuxARM-aarch64-latest.tar.gz
@@ -14,13 +16,15 @@ MIRROR := http://de5.mirror.archlinuxarm.org
 	mv ".cache/tmp/ArchLinuxARM-aarch64-latest.tar.gz" ".cache/ArchLinuxARM-aarch64-latest.tar.gz"
 
 # this target re-executes every time... why?
-.cache/root: .cache/ArchLinuxARM-aarch64-latest.tar.gz
+# commented dependency
+.cache/root: # .cache/ArchLinuxARM-aarch64-latest.tar.gz
 	sudo mkdir -p ".cache/root"
 	sudo su -c 'bsdtar -xpf ".cache/ArchLinuxARM-aarch64-latest.tar.gz" -C ".cache/root"'
 	sudo rsync -a --no-o --no-g "root/" ".cache/root/"
 
-export LC_ALL := POSIX
-setup: .cache/root
+# this target re-executes every time... why?
+# commented dependency
+setup: # .cache/root
 	mountpoint ".cache/root" > /dev/null || sudo mount --bind ".cache/root" ".cache/root"
 	sudo arch-chroot ".cache/root" pacman-key --init
 	sudo arch-chroot ".cache/root" pacman-key --populate archlinuxarm
