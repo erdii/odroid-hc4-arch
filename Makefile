@@ -27,7 +27,7 @@ setup: .cache/root
 	sudo arch-chroot ".cache/root" /bin/bash -c 'pacman -Q linux-aarch64; if [[ $$? == 0 ]]; then pacman -Rs linux-aarch64 --noconfirm; else true; fi'
 	sudo arch-chroot ".cache/root" pacman -Syu --noconfirm
 	sudo arch-chroot ".cache/root" pacman -S uboot-tools linux-aarch64-rc --noconfirm
-	sudo arch-chroot ".cache/root" pacman -S sudo man-db base-devel git --noconfirm
+	sudo arch-chroot ".cache/root" pacman -S sudo man-db base-devel git vim --noconfirm
 	sudo umount -R ".cache/root"
 
 clean:
