@@ -5,6 +5,13 @@ MIRROR := http://de5.mirror.archlinuxarm.org
 
 export LC_ALL := POSIX
 
+fresh: | \
+	clean \
+	.cache/ArchLinuxARM-aarch64-latest.tar.gz \
+	.cache/root \
+	setup
+.PHONY: fresh
+
 .cache/ArchLinuxARM-aarch64-latest.tar.gz:
 	mkdir -p ".cache/tmp"
 	curl -o ".cache/tmp/ArchLinuxARM-aarch64-latest.tar.gz" $(MIRROR)/os/ArchLinuxARM-aarch64-latest.tar.gz
