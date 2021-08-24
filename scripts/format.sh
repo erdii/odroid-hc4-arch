@@ -17,9 +17,9 @@ fi
 set -x
 
 parted --script "$DEVICE" \
-    mklabel msdos \
-    mkpart primary fat16 1MiB 500MiB \
-    mkpart primary ext4 500MiB 100% \
+    mklabel gpt \
+    mkpart fat32 1MiB 500MiB \
+    mkpart ext4 500MiB 100% \
 
 partprobe "$DEVICE"
 
