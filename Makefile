@@ -44,3 +44,14 @@ setup: # .cache/root
 clean:
 	sudo umount -R ".cache/root" || true
 	[[ ! -e ".cache/root" ]] || sudo rm -rf ".cache/root"
+
+# reuse existing prepared root filetree for a new host
+new-host:
+	mountpoint ".cache/root" > /dev/null || sudo mount --bind ".cache/root" ".cache/root"
+	sudo arch-chroot ".cache/root" rm -rf /etc/pacman.d/gnupg
+	sudo rsync -a --no-o --no-g "root/" ".cache/root/"
+	sudo arch-chroot ".cache/root" truncate -s 0 /etc/machine-id
+
+	sudo arch-chroot ".cache/root" pacman-key --init
+	sudo arch-chroot ".cache/root" pacman-key --populate archlinuxarm
+	sudo umount -R ".cache/root"
